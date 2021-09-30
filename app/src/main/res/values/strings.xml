@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">UniversalStore</string>
+    <string name="comenzar">COMENZAR</string>
+    <string name="bienvenido">BIENVENIDOS A UNIVERSAL STORE</string>
+    <string name="login">LOGIN</string>
+    <string name="email">Email</string>
+    <string name="pass">Password</string>
+    <string name="btnlogin">LOGIN</string>
+    <string name="problema">¿Problemas para Ingresar?</string>
+    <string name="registro">REGISTER</string>
+    <string name="registrotienda">REGISTER SHOP</string>
+    <string name="nombre">Ingrese Nombre Completo</string>
+    <string name="emailregis">Email</string>
+    <string name="pais">Pais</string>
+    <string name="ciudad">Ciudad</string>
+    <string name="passregis">Password</string>
+    <string name="rol">Rol</string>
+    <string name="tienda">Nombre de la Tienda</string>
+    <string name="btnregis">Create Register</string>
+    <string name="btnatras">Atrás</string>
+</resources>
