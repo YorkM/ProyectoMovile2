@@ -254,6 +254,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/boton"
         android:fontFamily="@font/aclonica"
+        android:onClick="atras"
         android:text="@string/btnatras"
         android:textColor="#B9FFFFFF"
         android:textSize="20sp"
