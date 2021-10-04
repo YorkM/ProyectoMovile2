@@ -102,7 +102,7 @@ public class Register_Activity extends AppCompatActivity {
             return false;
 
         }
-    
+
     }
 
 }
