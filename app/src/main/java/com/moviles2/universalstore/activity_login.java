@@ -28,21 +28,30 @@ public class activity_login extends AppCompatActivity {
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validarEmail(etemail);
-                limpiarCampos();
+                validarUser(etemail);
+                //limpiarCampos();
             }
         });
 
     }
 
-    private boolean validarEmail(EditText etemail){
+    private boolean validarUser(EditText etemail){
         String inputemail = etemail.getText().toString();
         String inputpass = etpassword.getText().toString();
+
 
         if (inputemail.isEmpty() && inputpass.isEmpty()){
             etemail.setError("Campo Requerido");
             etpassword.setError("Campo Requerido");
-            return false;
+            return  false;
+        }
+        else if (inputemail.isEmpty() && !inputpass.isEmpty()){
+            etemail.setError("Campo Requerido");
+             return false;
+        }
+        else  if(!inputemail.isEmpty() && inputpass.isEmpty()){
+            etpassword.setError("Campo Requerido");
+            return  false;
         }
         else  if (Patterns.EMAIL_ADDRESS.matcher(inputemail).matches()){
             return true;
