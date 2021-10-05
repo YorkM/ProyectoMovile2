@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Register_Activity extends AppCompatActivity {
 
     EditText etnombre, etemail, etpais, etciudad, etpass, ettienda;
@@ -57,6 +60,12 @@ public class Register_Activity extends AppCompatActivity {
         String inputCiudad = etciudad.getText().toString();
         String inputPass = etpass.getText().toString();
         String inputTienda = ettienda.getText().toString();
+
+        Pattern c = Pattern.compile("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,20}$");
+        Matcher M = c.matcher(inputPass);
+        if (!M.find()){
+            etpass.setError("Contraseña no Válida");
+        }
 
     if  (inputNombre.isEmpty() && inputEmail.isEmpty() && inpuPais.isEmpty() &&
         inputCiudad.isEmpty() && inputPass.isEmpty() && inputTienda.isEmpty()){
