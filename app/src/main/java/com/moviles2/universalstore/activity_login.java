@@ -91,11 +91,12 @@ public class activity_login extends AppCompatActivity {
 
     public void  validators (View view){
         Pattern p = Pattern.compile("[a-z0-9!#$%&'+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'+/=?^_`{|}~-]+)@(?:[a-z0-9](?:[a-z0-9-][a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
-        Pattern c = Pattern.compile("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$");
+       // Pattern c = Pattern.compile("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$");
+        String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
         String inputemail = etemail.getText().toString();
         String inputpass = etpassword.getText().toString();
         Matcher m = p.matcher(inputemail);
-        Matcher M = c.matcher(inputpass);
+       // Matcher M = c.matcher(inputpass);
 
         if (inputemail.isEmpty() && inputpass.isEmpty()){
             etemail.setError("Campo Requerido");
@@ -114,7 +115,7 @@ public class activity_login extends AppCompatActivity {
             etpassword.setError("Campo Requerido");
 
         }
-        else if (!M.find()){
+        else if (!inputpass.matches(pattern)){
 
             etpassword.setError("Password no Válido");
 
@@ -122,9 +123,7 @@ public class activity_login extends AppCompatActivity {
 
         else {
 
-            Intent register = new Intent(this, Register_Activity.class);
-
-            startActivity(register);
+           irTienda();
 
         }
 

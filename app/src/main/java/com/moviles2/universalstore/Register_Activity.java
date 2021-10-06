@@ -38,6 +38,7 @@ public class Register_Activity extends AppCompatActivity {
         btnregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 validarRegistro(etemail);
             }
         });
@@ -61,10 +62,11 @@ public class Register_Activity extends AppCompatActivity {
         String inputPass = etpass.getText().toString();
         String inputTienda = ettienda.getText().toString();
 
-        Pattern c = Pattern.compile("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,20}$");
-        Matcher M = c.matcher(inputPass);
-        if (!M.find()){
-            etpass.setError("Contraseña no Válida");
+       //Pattern c = Pattern.compile("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,20}$");
+       // Matcher M = c.matcher(inputPass);
+        String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
+        if (!inputPass.matches(pattern)){
+            etpass.setError("Password no Válido");
         }
 
     if  (inputNombre.isEmpty() && inputEmail.isEmpty() && inpuPais.isEmpty() &&
