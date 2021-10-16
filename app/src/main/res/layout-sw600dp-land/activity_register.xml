@@ -159,6 +159,7 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/boton"
         android:fontFamily="@font/aclonica"
+        android:onClick="register"
         android:text="@string/btnregis"
         android:textColor="#B4FFFFFF"
         android:textSize="17sp"

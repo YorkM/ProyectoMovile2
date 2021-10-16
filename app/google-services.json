@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1061180625746",
+    "project_id": "universalstore-34176",
+    "storage_bucket": "universalstore-34176.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061180625746:android:09d40eae708cc9ff67a08b",
+        "android_client_info": {
+          "package_name": "com.moviles2.universalstore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061180625746-e5jfl8n27a4b6psdguf027m76v3unbjv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDjPOIA4U0MAGPVs_JV5JD4ZwrAXRLtTI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061180625746-e5jfl8n27a4b6psdguf027m76v3unbjv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,6 @@
 package com.moviles2.universalstore;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,9 +11,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Register_Activity extends AppCompatActivity {
 
@@ -20,6 +31,9 @@ public class Register_Activity extends AppCompatActivity {
     Button btnatras, btnregister;
 
     Spinner spinner;
+
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,42 +49,32 @@ public class Register_Activity extends AppCompatActivity {
         btnatras = findViewById(R.id.btnatras);
         btnregister = findViewById(R.id.btnregis);
 
-        btnregister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
-                validarRegistro(etemail);
-            }
-        });
 
         spinner = findViewById(R.id.spinner);
-        String[] opciones = {" ","Usuario","Vendedor"};
-        ArrayAdapter <String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item_rol, opciones);
+        String[] opciones = {" ", "Usuario", "Vendedor"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item_rol, opciones);
         spinner.setAdapter(adapter);
     }
 
-    public void atras(View view){
+    public void atras(View view) {
         Intent atras = new Intent(this, activity_login.class);
         startActivity(atras);
     }
 
-    private boolean validarRegistro(EditText etemail){
+    public void register(View view){
         String inputNombre = etnombre.getText().toString();
         String inputEmail = etemail.getText().toString();
         String inpuPais = etpais.getText().toString();
         String inputCiudad = etciudad.getText().toString();
         String inputPass = etpass.getText().toString();
         String inputTienda = ettienda.getText().toString();
-
-       //Pattern c = Pattern.compile("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,20}$");
-       // Matcher M = c.matcher(inputPass);
         String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
-        if (!inputPass.matches(pattern)){
-            etpass.setError("Password no Válido");
-        }
 
-    if  (inputNombre.isEmpty() && inputEmail.isEmpty() && inpuPais.isEmpty() &&
-        inputCiudad.isEmpty() && inputPass.isEmpty() && inputTienda.isEmpty()){
+    if (inputNombre.isEmpty() && inputEmail.isEmpty() && inpuPais.isEmpty() &&
+                inputCiudad.isEmpty() && inputPass.isEmpty() && inputTienda.isEmpty()) {
 
             etnombre.setError("Campo Requerido");
             etemail.setError("Campo Requerido");
@@ -78,42 +82,73 @@ public class Register_Activity extends AppCompatActivity {
             etciudad.setError("Campo Requerido");
             etpass.setError("Campo Requerido");
             ettienda.setError("Campo Requerido");
-            return false;
-        }
 
-        else if (inputEmail.isEmpty() && !inputPass.isEmpty() && !inpuPais.isEmpty() && !inputCiudad.isEmpty() && !inputNombre.isEmpty() && !inputTienda.isEmpty()){
-            etemail.setError("Campo Requerido");
-            return false;
-        }
-        else  if(!inputEmail.isEmpty() && inputPass.isEmpty() && !inputCiudad.isEmpty() && !inpuPais.isEmpty() && !inputNombre.isEmpty() && !inputTienda.isEmpty()){
-            etpass.setError("Campo Requerido");
-            return  false;
-        }
-        else  if(!inputEmail.isEmpty() && !inputPass.isEmpty() && inputCiudad.isEmpty() && !inpuPais.isEmpty() && !inputNombre.isEmpty() && !inputTienda.isEmpty()){
-            etpass.setError("Campo Requerido");
-            return  false;
-        }
-        else  if(!inputEmail.isEmpty() && !inputPass.isEmpty() && !inputCiudad.isEmpty() && inpuPais.isEmpty() && !inputNombre.isEmpty() && !inputTienda.isEmpty()){
-            etpass.setError("Campo Requerido");
-            return  false;
-        }
-        else  if(!inputEmail.isEmpty() && !inputPass.isEmpty() && !inputCiudad.isEmpty() && !inpuPais.isEmpty() && inputNombre.isEmpty() && !inputTienda.isEmpty()){
-            etpass.setError("Campo Requerido");
-            return  false;
-        }
-        else  if(!inputEmail.isEmpty() && !inputPass.isEmpty() && !inputCiudad.isEmpty() && !inpuPais.isEmpty() && !inputNombre.isEmpty() && inputTienda.isEmpty()){
-            etpass.setError("Campo Requerido");
-            return  false;
-        }
-        else  if (Patterns.EMAIL_ADDRESS.matcher(inputEmail).matches()){
-            return true;
-        }
-        else{
+        } else if (!inputPass.matches(pattern)) {
+
+            etpass.setError("Password no Válido");
+
+    } else if (!Patterns.EMAIL_ADDRESS.matcher(inputEmail).matches()) {
+
             etemail.setError("Correo no Válido");
-            return false;
+    } else {
 
-        }
+            mAuth.createUserWithEmailAndPassword(inputEmail, inputPass)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(getApplicationContext(), "Registro Exitoso", Toast.LENGTH_LONG).show();
+                                saveUserFirestore();
+                                Intent inte = new Intent(getApplicationContext(), activity_login.class);
+                                startActivity(inte);
+                                limpiarDatos();
 
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Registro Fallido", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+             }
+
+     }
+
+    public  void saveUserFirestore() {
+        Map<String, Object> user = new HashMap<>();
+        String inputNombre = etnombre.getText().toString();
+        String inputEmail = etemail.getText().toString();
+        String inpuPais = etpais.getText().toString();
+        String inputCiudad = etciudad.getText().toString();
+        String inputPass = etpass.getText().toString();
+        String inputTienda = ettienda.getText().toString();
+        user.put("nombre", inputNombre);
+        user.put("email", inputEmail );
+        user.put("pais", inpuPais);
+        user.put("ciudad", inputCiudad);
+        user.put("tienda", inputTienda);
+        db.collection("bduniversalstore")
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Toast.makeText(getApplicationContext(), "Registro Completo", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "Registro Fallido", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
     }
 
+    public void  limpiarDatos(){
+        etnombre.setText("");
+        etemail.setText("");
+        etpais.setText("");
+        etciudad.setText("");
+        etpass.setText("");
+        ettienda.setText("");
+    }
 }
+

@@ -180,7 +180,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/boton"
             android:fontFamily="@font/aclonica"
-            android:onClick="validators"
+            android:onClick="login"
             android:text="@string/btnlogin"
             android:textColor="#B4FFFFFF"
             android:textSize="30sp" />

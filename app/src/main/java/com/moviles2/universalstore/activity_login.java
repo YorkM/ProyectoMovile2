@@ -1,5 +1,6 @@
 package com.moviles2.universalstore;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +23,8 @@ public class activity_login extends AppCompatActivity {
 
    EditText etemail, etpassword;
    Button btnlogin, btnregister;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,50 +36,9 @@ public class activity_login extends AppCompatActivity {
         btnlogin = findViewById(R.id.btnlogin);
         btnregister = findViewById(R.id.btnregister);
 
-       /* btnlogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                validarUser(etemail, etpassword);
-                //limpiarCampos();
-            }
-        });*/
+        mAuth = FirebaseAuth.getInstance();
 
     }
-
-    /*private boolean validarUser(EditText etemail, EditText etpassword){
-        String inputemail = etemail.getText().toString();
-        String inputpass = etpassword.getText().toString();
-        Boolean respuesta;
-
-        Pattern c = Pattern.compile("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$");
-        Matcher M = c.matcher(inputpass);
-        if (respuesta=!M.find()){
-            etpassword.setError(respuesta.toString());
-        }
-
-        if (inputemail.isEmpty() && inputpass.isEmpty()){
-
-            etemail.setError("Campo Requerido");
-            etpassword.setError("Campo Requerido");
-            return  false;
-        }
-        else if (inputemail.isEmpty() && !inputpass.isEmpty()){
-            etemail.setError("Campo Requerido");
-             return false;
-        }
-        else  if(!inputemail.isEmpty() && inputpass.isEmpty()){
-            etpassword.setError("Campo Requerido");
-            return  false;
-        }
-        else  if (Patterns.EMAIL_ADDRESS.matcher(inputemail).matches()){
-            return true;
-        }
-        else{
-            etemail.setError("correo no valido");
-            return false;
-
-        }
-    }*/
 
     public void irRegister(View view){
         Intent register = new Intent(this, Register_Activity.class);
@@ -89,7 +56,7 @@ public class activity_login extends AppCompatActivity {
         startActivity(tienda);
     }
 
-    public void  validators (View view){
+    public void  login (View view){
         Pattern p = Pattern.compile("[a-z0-9!#$%&'+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'+/=?^_`{|}~-]+)@(?:[a-z0-9](?:[a-z0-9-][a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
        // Pattern c = Pattern.compile("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$");
         String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
@@ -123,7 +90,21 @@ public class activity_login extends AppCompatActivity {
 
         else {
 
-           irTienda();
+            mAuth.signInWithEmailAndPassword(inputemail, inputpass)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+
+                            if(task.isSuccessful()){
+                                Toast.makeText(getApplicationContext(), "Login Exitoso", Toast.LENGTH_LONG).show();
+                                Intent inte = new Intent(getApplicationContext(), Tienda_Activity.class);
+                                startActivity(inte);
+
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Login Fallido",  Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
 
         }
 
