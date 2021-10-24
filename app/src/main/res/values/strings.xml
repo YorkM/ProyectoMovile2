@@ -18,4 +18,6 @@
     <string name="tienda">Nombre de la Tienda</string>
     <string name="btnregis">Create Register</string>
     <string name="btnatras">Atrás</string>
+    <string name="btneditar">Editar</string>
+    <string name="btndelete">Eliminar</string>
 </resources>
