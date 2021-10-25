@@ -33,7 +33,7 @@ public class Tienda_Activity extends AppCompatActivity {
         setContentView(view);
         db = FirebaseFirestore.getInstance();
         productArrayList = new ArrayList<>();
-        productAdapter = new ProductAdapter(this, productArrayList);
+        productAdapter = new ProductAdapter(this, productArrayList, db);
         tiendaBinding.rvProducts.setHasFixedSize(true);
         tiendaBinding.rvProducts.setLayoutManager(new LinearLayoutManager(this));
         tiendaBinding.rvProducts.setAdapter(productAdapter);

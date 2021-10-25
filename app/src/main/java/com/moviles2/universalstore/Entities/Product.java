@@ -4,6 +4,7 @@ import com.google.firebase.firestore.DocumentId;
 
 public class Product {
 
+
     @DocumentId
     private String id;
     private String name;
@@ -11,6 +12,14 @@ public class Product {
     private int stock;
     private double price;
     private String category;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
