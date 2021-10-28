@@ -20,4 +20,11 @@
     <string name="btnatras">Atrás</string>
     <string name="btneditar">Editar</string>
     <string name="btndelete">Eliminar</string>
+    <string name="btnactualizar">Actualizar</string>
+    <string name="product_name">Nombre Producto</string>
+    <string name="descrip_pro">Descripcion Producto</string>
+    <string name="stock_pro">Unidades Disponibles</string>
+    <string name="price_pro">Precio</string>
+    <string name="category_pro">Categoria</string>
+    <string name="title_update">Actualizar Productos</string>
 </resources>

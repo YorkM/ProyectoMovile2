@@ -100,6 +100,7 @@ public class activity_login extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Login Exitoso", Toast.LENGTH_LONG).show();
                                 Intent inte = new Intent(getApplicationContext(), Tienda_Activity.class);
                                 startActivity(inte);
+                                limpiar();
 
                             } else {
                                 Toast.makeText(getApplicationContext(), "Login Fallido",  Toast.LENGTH_LONG).show();
@@ -109,6 +110,12 @@ public class activity_login extends AppCompatActivity {
 
         }
 
+    }
+
+    public void limpiar(){
+        etemail.setText("");
+        etpassword.setText("");
+        etemail.requestFocus();
     }
 
 

@@ -3,6 +3,7 @@ package com.moviles2.universalstore.Adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.moviles2.universalstore.EditProductActivity;
 import com.moviles2.universalstore.Entities.Product;
 import com.moviles2.universalstore.databinding.ProductItemBinding;
 
@@ -81,6 +83,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             public void onClick(View v) {
                 alert.setMessage("¿Està seguro que quiere eliminar el producto?");
                 alert.create().show();
+            }
+        });
+        holder.itemBinding.btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, EditProductActivity.class);
+                intent.putExtra("product", product);
+                context.startActivity(intent);
             }
         });
 
