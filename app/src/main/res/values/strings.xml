@@ -27,4 +27,6 @@
     <string name="price_pro">Precio</string>
     <string name="category_pro">Categoria</string>
     <string name="title_update">Actualizar Productos</string>
+    <string name="addprod">Agregar Productos</string>
+    <string name="btnagre">Agregar</string>
 </resources>

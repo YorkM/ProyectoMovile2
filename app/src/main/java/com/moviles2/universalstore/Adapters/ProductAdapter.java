@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.moviles2.universalstore.AddProduct;
 import com.moviles2.universalstore.EditProductActivity;
 import com.moviles2.universalstore.Entities.Product;
 import com.moviles2.universalstore.databinding.ProductItemBinding;
@@ -78,14 +79,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
             }
         });
-        holder.itemBinding.btnDelete.setOnClickListener(new View.OnClickListener() {
+        holder.itemBinding.btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alert.setMessage("¿Està seguro que quiere eliminar el producto?");
                 alert.create().show();
             }
         });
-        holder.itemBinding.btnEdit.setOnClickListener(new View.OnClickListener() {
+        holder.itemBinding.btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, EditProductActivity.class);
@@ -93,6 +94,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 context.startActivity(intent);
             }
         });
+
+        holder.itemBinding.btnAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, AddProduct.class);
+                //intent.putExtra("product", product);
+                context.startActivity(intent);
+            }
+        });
+
 
     }
 

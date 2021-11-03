@@ -74,36 +74,35 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="57dp"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btnEdit"
+                <ImageButton
+                    android:id="@+id/btnEditar"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_margin="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:background="@drawable/boton"
-                    android:fontFamily="@font/aclonica"
-                    android:text="@string/btneditar"
-                    android:textColor="#BFFFFFFF"
-                    android:textColorHighlight="#009688"
-                    android:textColorHint="@color/black"
-                    android:textColorLink="@color/purple_700" />
+                    android:background="#7E4CAF50"
+                    app:srcCompat="@drawable/ic_baseline_edit" />
 
-                <Button
-                    android:id="@+id/btnDelete"
+                <ImageButton
+                    android:id="@+id/btnEliminar"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_margin="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:background="@drawable/boton"
-                    android:fontFamily="@font/aclonica"
-                    android:text="@string/btndelete"
-                    android:textColor="#BFFFFFFF"
-                    android:textColorHighlight="#009688"
-                    android:textColorHint="@color/black"
-                    android:textColorLink="@color/purple_700" />
+                    android:background="#7E4CAF50"
+                    app:srcCompat="@drawable/ic_baseline_delete_24" />
+
+                <ImageButton
+                    android:id="@+id/btnAgregar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="#7E4CAF50"
+                    app:srcCompat="@drawable/ic_baseline_add_24" />
             </LinearLayout>
 
         </LinearLayout>

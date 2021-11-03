@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UniversalStore">
-        <activity android:name=".EditProductActivity"></activity>
+        <activity android:name=".AddProduct"></activity>
+        <activity android:name=".EditProductActivity" />
         <activity android:name=".Tienda_Activity" />
         <activity android:name=".Register_Activity" />
         <activity android:name=".activity_login" />
