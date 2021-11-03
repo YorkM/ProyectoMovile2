@@ -11,6 +11,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
+        app:cardBackgroundColor="#C64BAF25"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp">
 
@@ -33,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:fontFamily="@font/advent_pro"
-                android:textColor="@color/micolor"
+                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <TextView
@@ -42,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:fontFamily="@font/advent_pro"
-                android:textColor="@color/micolor"
+                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <TextView
@@ -51,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:fontFamily="@font/advent_pro"
-                android:textColor="@color/micolor"
+                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <TextView
@@ -60,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:fontFamily="@font/advent_pro"
-                android:textColor="@color/micolor"
+                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <TextView
@@ -69,12 +70,12 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:fontFamily="@font/advent_pro"
-                android:textColor="@color/micolor"
+                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="57dp"
+                android:layout_height="44dp"
                 android:orientation="horizontal">
 
                 <ImageButton
@@ -82,8 +83,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_weight="1"
-                    android:background="#7E4CAF50"
+                    android:background="@drawable/etredond"
                     app:srcCompat="@drawable/ic_baseline_edit" />
 
                 <ImageButton
@@ -91,8 +93,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_weight="1"
-                    android:background="#7E4CAF50"
+                    android:background="@drawable/etredond"
                     app:srcCompat="@drawable/ic_baseline_delete_24" />
 
                 <ImageButton
@@ -100,8 +103,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_weight="1"
-                    android:background="#7E4CAF50"
+                    android:background="@drawable/etredond"
                     app:srcCompat="@drawable/ic_baseline_add_24" />
             </LinearLayout>
 
