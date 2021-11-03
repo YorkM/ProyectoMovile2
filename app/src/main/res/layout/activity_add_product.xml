@@ -118,6 +118,7 @@
         android:layout_marginTop="48dp"
         android:background="@drawable/boton"
         android:fontFamily="@font/aclonica"
+        android:onClick="addProductFirestore"
         android:text="@string/btnagre"
         android:textColor="#BEFFFFFF"
         android:textSize="20sp"
