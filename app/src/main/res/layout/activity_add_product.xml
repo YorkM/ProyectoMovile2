@@ -7,25 +7,11 @@
     android:background="@drawable/fondoapp"
     tools:context=".AddProduct">
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="409dp"
-        android:layout_height="85dp"
-        android:layout_marginTop="36dp"
-        android:fontFamily="@font/aclonica"
-        android:gravity="center"
-        android:text="@string/addprod"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/etName"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:background="#A8FFFFFF"
         android:ems="10"
         android:fontFamily="@font/advent_pro"
@@ -36,14 +22,15 @@
         android:textColorHint="@color/micolor"
         android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSelectImage" />
 
     <EditText
         android:id="@+id/etDescription"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="15dp"
         android:background="#A8FFFFFF"
         android:ems="10"
         android:fontFamily="@font/advent_pro"
@@ -61,7 +48,7 @@
         android:id="@+id/etStock"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="15dp"
         android:background="#A8FFFFFF"
         android:ems="10"
         android:fontFamily="@font/advent_pro"
@@ -79,7 +66,7 @@
         android:id="@+id/etPrice"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="15dp"
         android:background="#A8FFFFFF"
         android:ems="10"
         android:fontFamily="@font/advent_pro"
@@ -97,7 +84,7 @@
         android:id="@+id/etCategory"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="15dp"
         android:background="#A8FFFFFF"
         android:ems="10"
         android:fontFamily="@font/advent_pro"
@@ -114,15 +101,41 @@
     <Button
         android:id="@+id/btnAddProduct"
         android:layout_width="300dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="48dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/boton"
         android:fontFamily="@font/aclonica"
-        android:onClick="addProductFirestore"
+        android:onClick="uploadImage"
         android:text="@string/btnagre"
         android:textColor="#BEFFFFFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etCategory" />
+
+    <Button
+        android:id="@+id/btnSelectImage"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/boton"
+        android:fontFamily="@font/aclonica"
+        android:onClick="pickImage"
+        android:text="@string/btnselectimage"
+        android:textColor="#CDFFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivProduct" />
+
+    <ImageView
+        android:id="@+id/ivProduct"
+        android:layout_width="402dp"
+        android:layout_height="211dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.395"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_carrito_de_compras" />
 </androidx.constraintlayout.widget.ConstraintLayout>

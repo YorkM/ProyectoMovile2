@@ -29,4 +29,5 @@
     <string name="title_update">Actualizar Productos</string>
     <string name="addprod">Agregar Productos</string>
     <string name="btnagre">Agregar</string>
+    <string name="btnselectimage">Select Image</string>
 </resources>

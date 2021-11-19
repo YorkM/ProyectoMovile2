@@ -14,6 +14,15 @@ public class Product implements Serializable {
     private int stock;
     private double price;
     private String category;
+    private String imageUrl;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public String getId() {
         return id;

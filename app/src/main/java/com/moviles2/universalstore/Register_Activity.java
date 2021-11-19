@@ -125,7 +125,7 @@ public class Register_Activity extends AppCompatActivity {
         user.put("pais", inpuPais);
         user.put("ciudad", inputCiudad);
         user.put("tienda", inputTienda);
-        db.collection("bduniversalstore")
+        db.collection("bdstore")
                 .add(user)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
