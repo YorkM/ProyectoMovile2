@@ -114,6 +114,7 @@ public class Register_Activity extends AppCompatActivity {
 
     public  void saveUserFirestore() {
         Map<String, Object> user = new HashMap<>();
+        String rol = spinner.getSelectedItem().toString();
         String inputNombre = etnombre.getText().toString();
         String inputEmail = etemail.getText().toString();
         String inpuPais = etpais.getText().toString();
@@ -124,8 +125,9 @@ public class Register_Activity extends AppCompatActivity {
         user.put("email", inputEmail );
         user.put("pais", inpuPais);
         user.put("ciudad", inputCiudad);
+        user.put("rol", rol);
         user.put("tienda", inputTienda);
-        db.collection("bdstore")
+        db.collection("bduniversalstore")
                 .add(user)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override

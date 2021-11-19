@@ -17,7 +17,7 @@
         app:cardElevation="10dp">
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/ivProductImg"
             android:layout_width="491dp"
             android:layout_height="191dp"
             android:layout_gravity="right"

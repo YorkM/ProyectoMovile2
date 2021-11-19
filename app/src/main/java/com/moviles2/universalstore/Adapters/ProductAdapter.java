@@ -12,12 +12,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.moviles2.universalstore.AddProduct;
 import com.moviles2.universalstore.EditProductActivity;
 import com.moviles2.universalstore.Entities.Product;
+import com.moviles2.universalstore.R;
 import com.moviles2.universalstore.databinding.ProductItemBinding;
 
 import java.util.ArrayList;
@@ -51,6 +53,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.itemBinding.tvStock.setText(String.valueOf(product.getStock()));
         holder.itemBinding.tvPrecio.setText(String.valueOf(product.getPrice()));
         holder.itemBinding.tvCategoria.setText(product.getCategory());
+        Glide.with(context)
+                .load(product.getImageUrl())
+                .placeholder(R.drawable.ic_carrito_de_compras)
+                .error(R.drawable.ic_carrito_de_compras)
+                //.circleCrop()
+                .into(holder.itemBinding.ivProductImg);
+
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override

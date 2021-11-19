@@ -133,6 +133,7 @@
         android:id="@+id/ivProduct"
         android:layout_width="402dp"
         android:layout_height="211dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.395"
         app:layout_constraintStart_toStartOf="parent"
