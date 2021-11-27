@@ -15,6 +15,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -103,7 +106,17 @@ public class activity_login extends AppCompatActivity {
                                 limpiar();
 
                             } else {
-                                Toast.makeText(getApplicationContext(), "Login Fallido",  Toast.LENGTH_LONG).show();
+                                try {
+                                    throw task.getException();
+                                } catch(FirebaseAuthWeakPasswordException e) {
+                                    Toast.makeText(getApplicationContext(), "Contraseña debil use mas de 6 caracteres ", Toast.LENGTH_LONG).show();
+                                } catch(FirebaseAuthInvalidCredentialsException e) {
+                                    Toast.makeText(getApplicationContext(), "Usuario y/o Contraseña Incorrecta", Toast.LENGTH_LONG).show();
+                                } catch(FirebaseAuthUserCollisionException e) {
+                                    Toast.makeText(getApplicationContext(), "El correo ya se encuentra en uso con otra cuenta", Toast.LENGTH_LONG).show();
+                                } catch(Exception e) {
+                                    Toast.makeText(getApplicationContext(), "Error de Auth: "+ e.getMessage(), Toast.LENGTH_LONG).show();
+                                }
                             }
                         }
                     });
