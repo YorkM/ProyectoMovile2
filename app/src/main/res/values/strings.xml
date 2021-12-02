@@ -30,4 +30,5 @@
     <string name="addprod">Agregar Productos</string>
     <string name="btnagre">Agregar</string>
     <string name="btnselectimage">Select Image</string>
+    <string name="user_preference_key">user_preference_key</string>
 </resources>

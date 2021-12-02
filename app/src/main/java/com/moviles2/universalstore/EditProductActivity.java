@@ -13,7 +13,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.moviles2.universalstore.Entities.Product;
 import com.moviles2.universalstore.databinding.ActivityEditProductBinding;
-import com.moviles2.universalstore.databinding.ActivityMainBinding;
+//import com.moviles2.universalstore.databinding.ActivityMainBinding;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -3,7 +3,9 @@ package com.moviles2.universalstore;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -18,6 +20,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.moviles2.universalstore.Entities.SharedEntity;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,8 +34,9 @@ public class activity_login extends AppCompatActivity {
    EditText etemail, etpassword;
    Button btnlogin, btnregister;
 
+    SharedEntity users;
     private FirebaseAuth mAuth;
-
+    private FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +48,7 @@ public class activity_login extends AppCompatActivity {
         btnregister = findViewById(R.id.btnregister);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
     }
 
@@ -100,10 +108,25 @@ public class activity_login extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
                             if(task.isSuccessful()){
-                                Toast.makeText(getApplicationContext(), "Login Exitoso", Toast.LENGTH_LONG).show();
-                                Intent inte = new Intent(getApplicationContext(), Tienda_Activity.class);
-                                startActivity(inte);
-                                limpiar();
+                                db.collection("bduniversalstore").whereEqualTo("email", inputemail)
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if(task.isSuccessful()){
+                                                    for(QueryDocumentSnapshot documentSnapshot: task.getResult()){
+                                                        users = documentSnapshot.toObject(SharedEntity.class);
+                                                        break;
+                                                    }
+                                                    Toast.makeText(getApplicationContext(), "Login Exitoso", Toast.LENGTH_LONG).show();
+                                                    saveUserPreferences(getApplicationContext());
+                                                    Intent inte = new Intent(getApplicationContext(), Tienda_Activity.class);
+                                                    startActivity(inte);
+                                                    limpiar();
+                                                }
+                                            }
+                                        });
+
 
                             } else {
                                 try {
@@ -124,6 +147,20 @@ public class activity_login extends AppCompatActivity {
         }
 
     }
+
+    public void saveUserPreferences(Context context){
+
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                getString(R.string.user_preference_key), Context.MODE_PRIVATE);
+        // permite escribir data en las shared preferences
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("status", true);
+        editor.putString("email", users.getEmail());
+        editor.putString("rol", users.getRol());
+        editor.putString("name", users.getName());
+        editor.commit();
+    }
+
 
     public void limpiar(){
         etemail.setText("");

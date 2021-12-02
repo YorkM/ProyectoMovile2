@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +22,13 @@ import com.moviles2.universalstore.AddProduct;
 import com.moviles2.universalstore.EditProductActivity;
 import com.moviles2.universalstore.Entities.Product;
 import com.moviles2.universalstore.R;
+import com.moviles2.universalstore.Splash_Screen;
+import com.moviles2.universalstore.activity_login;
 import com.moviles2.universalstore.databinding.ProductItemBinding;
 
 import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
@@ -30,7 +36,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     private ProductItemBinding productItemBinding;
     private ArrayList<Product> productArrayList;
     private FirebaseFirestore db;
-
+    String roles=null;
     public ProductAdapter(Context context, ArrayList<Product> productArrayList, FirebaseFirestore db) {
         this.context = context;
         this.productArrayList = productArrayList;
@@ -60,6 +66,36 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 //.circleCrop()
                 .into(holder.itemBinding.ivProductImg);
 
+        Splash_Screen r = new Splash_Screen();
+
+        if(r.rol(context).equals("Vendedor")){
+            holder.itemBinding.btnEliminar.setVisibility(View.INVISIBLE);
+            holder.itemBinding.btnComprar.setVisibility(View.INVISIBLE);
+
+        }
+        else
+            if (r.rol(context).equals("Usuario")){
+                holder.itemBinding.btnEliminar.setVisibility(View.INVISIBLE);
+                holder.itemBinding.btnAgregar.setVisibility(View.INVISIBLE);
+                holder.itemBinding.btnEditar.setVisibility(View.INVISIBLE);
+                holder.itemBinding.btnComprar.setVisibility(View.VISIBLE);
+            }
+
+        holder.itemBinding.btnCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPref = context.getSharedPreferences(
+                        context.getString(R.string.user_preference_key), Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.clear();
+                editor.apply();
+
+                Intent i = new Intent(context, activity_login.class);
+                context.startActivity(i);
+            }
+        });
+
+
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
@@ -68,7 +104,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                         .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(context, "Product Deleted", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, r.rol(context),Toast.LENGTH_LONG).show();
                         productArrayList.remove(holder.getAdapterPosition());
                         notifyDataSetChanged();
                     }

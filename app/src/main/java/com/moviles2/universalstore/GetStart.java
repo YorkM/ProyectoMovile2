@@ -7,16 +7,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.moviles2.universalstore.databinding.ActivityMainBinding;
+import com.moviles2.universalstore.databinding.ActivityGetstartBinding;
 
-public class MainActivity extends AppCompatActivity {
-    private ActivityMainBinding binding;
+public class GetStart extends AppCompatActivity {
+    private ActivityGetstartBinding binding;
     Button btncomenzar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityGetstartBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
